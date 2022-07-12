@@ -95,10 +95,11 @@ testMatrix.setupTestSuite((suiteConfig, suiteMeta) => {
             Invalid \`prisma.user.findUniqueOrThrow()\` invocation in
             /client/tests/functional/findUniqueOrThrow/tests.ts:87:32
 
-               84 })
-               85 
-               86 test('does not accept rejectOnNotFound option', async () => {
-            →  87   const record = prisma.user.findUniqueOrThrow(
+              84 })
+              85 
+              86 test('does not accept rejectOnNotFound option', async () => {
+            → 87   const record = prisma.user.findUniqueOrThrow(
+
             'rejectOnNotFound' option is not supported
           `)
   })

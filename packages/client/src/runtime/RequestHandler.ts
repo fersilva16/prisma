@@ -12,7 +12,8 @@ import type { Client, Unpacker } from './getPrismaClient'
 import type { EngineMiddleware } from './MiddlewareHandler'
 import type { Document } from './query'
 import { Args, unpack } from './query'
-import { printStack } from './utils/printStack'
+import { CallSite } from './utils/CallSite'
+import { createErrorMessageWithContext } from './utils/createErrorMessageWithContext'
 import type { RejectOnNotFound } from './utils/rejectOnNotFound'
 import { throwIfNotFound } from './utils/rejectOnNotFound'
 
@@ -25,7 +26,7 @@ export type RequestParams = {
   typeName: string
   isList: boolean
   clientMethod: string
-  callsite?: string
+  callsite?: CallSite
   rejectOnNotFound?: RejectOnNotFound
   runInTransaction?: boolean
   engineHook?: EngineMiddleware
@@ -38,7 +39,7 @@ export type RequestParams = {
 export type HandleErrorParams = {
   error: any
   clientMethod: string
-  callsite?: string
+  callsite?: CallSite
 }
 
 export type Request = {
@@ -168,13 +169,13 @@ export class RequestHandler {
 
     let message = error.message
     if (callsite) {
-      const { stack } = printStack({
+      message = createErrorMessageWithContext({
         callsite,
         originalMethod: clientMethod,
-        onUs: error.isPanic,
+        isPanic: error.isPanic,
         showColors: this.client._errorFormat === 'pretty',
+        message,
       })
-      message = `${stack}\n  ${error.message}`
     }
 
     message = this.sanitizeMessage(message)

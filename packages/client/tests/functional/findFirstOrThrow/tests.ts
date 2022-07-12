@@ -95,10 +95,11 @@ testMatrix.setupTestSuite((suiteConfig, suiteMeta) => {
             Invalid \`prisma.user.findFirstOrThrow()\` invocation in
             /client/tests/functional/findFirstOrThrow/tests.ts:87:32
 
-               84 })
-               85 
-               86 test('does not accept rejectOnNotFound option', async () => {
-            →  87   const record = prisma.user.findFirstOrThrow(
+              84 })
+              85 
+              86 test('does not accept rejectOnNotFound option', async () => {
+            → 87   const record = prisma.user.findFirstOrThrow(
+
             'rejectOnNotFound' option is not supported
           `)
   })

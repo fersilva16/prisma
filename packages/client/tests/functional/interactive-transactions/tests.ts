@@ -203,7 +203,8 @@ testMatrix.setupTestSuite(({ provider }) => {
               188 
               189 const result = prisma.$transaction(async () => {
             → 190   await transactionBoundPrisma.user.create(
-              Transaction API error: Transaction already closed: A query cannot be executed on a closed transaction..
+
+            Transaction API error: Transaction already closed: A query cannot be executed on a closed transaction..
           `)
 
     const users = await prisma.user.findMany()
