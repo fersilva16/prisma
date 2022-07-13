@@ -20,8 +20,9 @@ test('incorrect-column-type', async () => {
             12   ],
             13 })
             14 
-          → 15 await expect(prisma.user.findMany()).rejects.toThrowErrorMatchingInlineSnapshot(
-            Error converting field "name" of expected non-nullable type "String", found incompatible value of "123".
+          → 15 await expect(prisma.user.findMany()).rejects.toThrowErrorMatchingInlineSnapshot(\`
+
+          Error converting field "name" of expected non-nullable type "String", found incompatible value of "123".
         `)
   await prisma.$disconnect()
 })
